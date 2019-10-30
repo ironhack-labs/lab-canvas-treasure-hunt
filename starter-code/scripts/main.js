@@ -10,16 +10,24 @@ class Character {
         this.row = row;
     }
     moveUp(){
-        this.row--;
+        if(this.row > 0){
+            this.row--;
+        }
     }
     moveRight(){
-        this.col++;
+        if(this.col < 9){
+            this.col++;
+        }
     }
     moveDown(){
-        this.row++;
+        if(this.row < 9){
+            this.row++;
+        }
     }
     moveLeft(){
+        if(this.col > 0){
         this.col--;
+        }
     }
 }
 
@@ -68,10 +76,10 @@ function drawTreasure(){
     image.src = IMAGE_URL;
     // console.dir(image);
     image.addEventListener('load', () => {
-        const imageHeight = image.height;
-        // console.log("Height", imageHeight);
-        const imageWidth = image.width;
-        // console.log("Width", imageWidth);
+        //const imageHeight = image.height;
+        //console.log("Height", imageHeight);
+        //const imageWidth = image.width;
+        //console.log("Width", imageWidth);
         context.drawImage(image, treasure.col*50+50, treasure.row*50+50, 50, 50);
     });
 }
@@ -83,3 +91,36 @@ function drawEverything() {
 }
 
 drawEverything();
+
+window.addEventListener('keydown', (event) => {
+    // Stop the default behavior (moving the screen to the left/up/right/down)
+    event.preventDefault();
+  
+    // React based on the key pressed
+    switch (event.keyCode) {
+      case 37:
+        console.log('left');
+        player.moveLeft();
+        console.log(player.col);
+        drawEverything();
+        break;
+      case 38:
+        console.log('up');
+        player.moveUp();
+        console.log(player.row);
+        drawEverything();
+        break;
+      case 39:
+        console.log('right');
+        player.moveRight();
+        console.log(player.col);
+        drawEverything();
+        break;
+      case 40:
+        console.log('down');
+        player.moveDown();
+        console.log(player.row);
+        drawEverything();
+        break;
+    }
+  });
