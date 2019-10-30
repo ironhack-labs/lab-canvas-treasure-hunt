@@ -4,7 +4,10 @@ const width = canvas.width;
 const height = canvas.height;
 
 const player = new Character(0, 0);
-const newTreasure = new Treasure(0, 0);
+const treasure = new Treasure(0, 0);
+
+player.setRandomPosition();
+treasure.setRandomPosition();
 
 // ITERATION 1
 
@@ -35,7 +38,7 @@ function drawPlayer () {
   const image = new Image();
   image.src = IMAGE_URL;
   image.addEventListener('load', () => {
-  context.drawImage(image, player.col, player.row);
+  context.drawImage(image, player.col*50, player.row*50);
   });
 }
 drawPlayer();
@@ -50,37 +53,58 @@ function drawTreasure() {
   const imageHeight = image.height;
   const imageWidth = image.width;
   const size = 0.2;
-  context.drawImage(image, player.col, player.row, imageWidth * size, imageHeight * size);
+  context.drawImage(image, treasure.col*50, treasure.row*50, imageWidth * size, imageHeight * size);
   });
 }
 drawTreasure();
 
+// ITERATION 5
 
+window.addEventListener('keydown', (event) => {
+  if([32, 37, 38, 39, 40].indexOf(event.keyCode) > -1) {
+    event.preventDefault();
+    }
+   switch (event.keyCode) {
+    case 37:
+      player.moveLeft();
+      drawEverything();
+      break;
+    case 38:
+      player.moveUp();
+      drawEverything();
+      break;
+    case 39:
+      player.moveRight();
+      drawEverything();
+      break;
+    case 40:
+      player.moveDown();
+      drawEverything();
+      break;
+    };
+    if (player.col === treasure.col && player.row === treasure.row) {
+      treasure.setRandomPosition();;
+    }
+});
 
 function drawEverything() {
-
+  context.clearRect(0, 0, width, height);
+  drawGrid();
+  drawPlayer();
+  drawTreasure();
 }
-drawEverything();
-
-console.log(newTreasure.col, newTreasure.row);
-newTreasure.setRandomPosition();
-console.log(newTreasure.col, newTreasure.row);
-
 
 /* console.log(player.col, player.row);
-
 player.moveDown(); 
 player.moveDown(); 
 player.moveRight();
-
 console.log(player.col, player.row);
-
 player.moveLeft();
-
 console.log(player.col, player.row);
-
 player.moveUp();
-
 console.log(player.col, player.row);
-
 drawPlayer(); */
+
+/* console.log(treasure.col, treasure.row);
+treasure.setRandomPosition();
+console.log(treasure.col, treasure.row); */

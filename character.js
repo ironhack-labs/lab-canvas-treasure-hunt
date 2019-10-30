@@ -21,6 +21,9 @@ class Character {
   moveLeft() {
     this.col--;
   }
+
+  setRandomPosition() {
+    this.col = Math.floor(Math.random() * 10);
+    this.row = Math.floor(Math.random() * 10);
+  }
 };
-
-

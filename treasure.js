@@ -11,4 +11,3 @@ class Treasure {
     this.row = Math.floor(Math.random() * 10);
   }
 };
-
