@@ -1,3 +1,32 @@
+//Iteration 2 complete
+class Character {
+  constructor(x, y){
+    this.col = x;
+    this.row = y;
+  }
+
+  moveUp() {
+    this.row -= 1;
+  }
+  
+  moveRight() {
+    this.col += 1;
+  }
+
+  moveDown() {
+    this.row +=1;
+  }
+
+  moveLeft() {
+    this.col -= 1;
+  }
+}
+
+// col property
+// row property
+ 
+
+
 // main.js
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
