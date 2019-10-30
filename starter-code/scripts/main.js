@@ -12,6 +12,25 @@ function drawGrid() {
   }
 }
 
+class Character {
+    constructor(col, row){
+        this.col = col;
+        this.row = row;
+    }
+    moveUp(){
+        this.row--;
+    }
+    moveRight(){
+        this.col++;
+    }
+    moveDown(){
+        this.row++;
+    }
+    moveLeft(){
+        this.col--;
+    }
+}
+
 function drawEverything() {
   drawGrid();
   // drawPlayer()
