@@ -1,0 +1,24 @@
+body {
+    background-color: black
+}
+
+canvas {
+    border: 2px solid red;
+    background-image: url('https://wallpapercave.com/wp/wp3342648.jpg');
+    background-size: cover;
+    width: 500px;
+}
+
+.whole-thing {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-right: 30%;
+    margin-left: 30%;
+    margin-top: 3rem;
+}
+
+h1,
+h2 {
+    color: white;
+}
