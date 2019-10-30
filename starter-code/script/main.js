@@ -1,8 +1,8 @@
 // Iteration 2
 class Character {
-  constructor(x, y){
-    this.col = x;
-    this.row = y;
+  constructor(){
+    this.col = 0;
+    this.row = 0;
   }
 
   moveUp() {
@@ -49,6 +49,11 @@ const WIDTH_OF_BOARD = canvas.width;
 const NUM_OF_COLS_AND_ROWS = 10;
 const WIDTH_OF_COLS = WIDTH_OF_BOARD / NUM_OF_COLS_AND_ROWS;
 
+let player = new Character;
+
+let treasure = new Treasure;
+treasure.setRandomPosition();
+
 // Iteration 1
 function drawGrid() {
   // TODO: write the code of the function
@@ -82,13 +87,11 @@ function drawPlayer() {
   image.src = 'images/character-down.png';
 
   image.addEventListener('load', () => {
-      context.drawImage(image, 0, 0, 48, 48);
+      context.drawImage(image, player.col * 50, player.row  * 50, 48, 48);
   });
 }
 
 function drawTreasure() {
-  let treasure = new Treasure;
-  treasure.setRandomPosition();
   let col = treasure.col;
   let row = treasure.row;
   // console.log(`Column: ${col}, Row: ${row}`);
@@ -109,3 +112,39 @@ function drawEverything() {
 }
 
 drawEverything();
+
+function clearPosition(col, row) {
+  context.clearRect(col*50, row*50, 48, 48);
+  // console.log('clear');
+  console.log(`Player row: ${player.row}, Player col: ${player.col}`);
+}
+
+window.addEventListener('keydown', (event) => {
+  // Stop the default behavior (moving the screen to the left/up/right/down)
+  event.preventDefault();
+
+  // React based on the key pressed
+  switch (event.keyCode) {
+    case 37:
+      console.log('left');
+      clearPosition(player.col, player.row);
+      player.moveLeft();
+      break;
+    case 38:
+      console.log('up');
+      clearPosition(player.col, player.row);
+      player.moveUp();
+      break;
+    case 39:
+      console.log('right');
+      clearPosition(player.col, player.row);
+      player.moveRight();
+      break;
+    case 40:
+      console.log('down');
+      clearPosition(player.col, player.row);
+      player.moveDown();
+      break;
+  }
+  drawPlayer();
+});
