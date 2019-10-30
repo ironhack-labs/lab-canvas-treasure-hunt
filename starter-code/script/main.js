@@ -1,4 +1,4 @@
-//Iteration 2 complete
+// Iteration 2
 class Character {
   constructor(x, y){
     this.col = x;
@@ -22,23 +22,37 @@ class Character {
   }
 }
 
-// col property
-// row property
- 
+class Treasure {
+  constructor() {
+    this.row;
+    this.col;
+  }
+
+  setRandomPosition() {
+    this.col = Math.floor(10*Math.random());
+    this.row = Math.floor(10*Math.random());
+  }
+}
+
+
 
 
 // main.js
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
-const width = canvas.width;
-const height = canvas.height;
+
+// I didn't see these at first...
+// const width = canvas.width;
+// const height = canvas.height;
+
+const WIDTH_OF_BOARD = canvas.width; 
+const NUM_OF_COLS_AND_ROWS = 10;
+const WIDTH_OF_COLS = WIDTH_OF_BOARD / NUM_OF_COLS_AND_ROWS;
 
 // Iteration 1
 function drawGrid() {
   // TODO: write the code of the function
-  const WIDTH_OF_BOARD = canvas.width; 
-  const NUM_OF_COLS_AND_ROWS = 10;
-  const WIDTH_OF_COLS = WIDTH_OF_BOARD / NUM_OF_COLS_AND_ROWS;
+
   
   // draw vertical lines
   for (let i=0; i <= NUM_OF_COLS_AND_ROWS; i++) {
@@ -59,10 +73,39 @@ function drawGrid() {
   }
 }
 
+function drawPlayer() {
+  // Test with an 'X'
+  // context.font = '32px Helvetica, sans-serif';
+  // context.fillText(`X`, 20, 40);
+
+  const image = new Image();
+  image.src = 'images/character-down.png';
+
+  image.addEventListener('load', () => {
+      context.drawImage(image, 0, 0, 48, 48);
+  });
+}
+
+function drawTreasure() {
+  let treasure = new Treasure;
+  treasure.setRandomPosition();
+  let col = treasure.col;
+  let row = treasure.row;
+  // console.log(`Column: ${col}, Row: ${row}`);
+  // context.font = '32px Helvetica, sans-serif';
+  // context.fillText('T', (col * 50) + 20, (row * 50) + 50); 
+
+  const image = new Image();
+  image.src = 'images/treasure.png';
+  image.addEventListener('load', () => {
+      context.drawImage(image, col * 50, row * 50, 48, 48);
+  });
+}
+
 function drawEverything() {
   drawGrid();
-  // drawPlayer()
-  // drawTreasure()
+  drawPlayer();
+  drawTreasure();
 }
 
 drawEverything();
