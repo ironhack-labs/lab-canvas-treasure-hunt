@@ -6,19 +6,19 @@ class Character {
   }
 
   moveUp() {
-    this.row -= 1;
+    this.row > 0 ? this.row -= 1 : this.row = 0
   }
   
   moveRight() {
-    this.col += 1;
+    this.col < 9 ? this.col += 1 : this.col = 9
   }
 
   moveDown() {
-    this.row +=1;
+    this.row < 9 ? this.row += 1 : this.row = 9
   }
 
   moveLeft() {
-    this.col -= 1;
+    this.col > 0 ? this.col -= 1 : this.col = 0
   }
 }
 
@@ -33,8 +33,6 @@ class Treasure {
     this.row = Math.floor(10*Math.random());
   }
 }
-
-
 
 
 // main.js
@@ -56,9 +54,7 @@ treasure.setRandomPosition();
 
 // Iteration 1
 function drawGrid() {
-  // TODO: write the code of the function
 
-  
   // draw vertical lines
   for (let i=0; i <= NUM_OF_COLS_AND_ROWS; i++) {
     context.beginPath();
@@ -79,16 +75,13 @@ function drawGrid() {
 }
 
 function drawPlayer() {
-  // Test with an 'X'
-  // context.font = '32px Helvetica, sans-serif';
-  // context.fillText(`X`, 20, 40);
-
   const image = new Image();
   image.src = 'images/character-down.png';
 
   image.addEventListener('load', () => {
       context.drawImage(image, player.col * 50, player.row  * 50, 48, 48);
   });
+  console.log(`Player row: ${player.row}, Player col: ${player.col}`);
 }
 
 function drawTreasure() {
@@ -115,8 +108,6 @@ drawEverything();
 
 function clearPosition(col, row) {
   context.clearRect((col*50)+1, (row*50)+1, 46, 46);
-  // console.log('clear');
-  console.log(`Player row: ${player.row}, Player col: ${player.col}`);
 }
 
 window.addEventListener('keydown', (event) => {
