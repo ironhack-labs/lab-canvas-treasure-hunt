@@ -114,7 +114,7 @@ function drawEverything() {
 drawEverything();
 
 function clearPosition(col, row) {
-  context.clearRect(col*50, row*50, 48, 48);
+  context.clearRect((col*50)+1, (row*50)+1, 46, 46);
   // console.log('clear');
   console.log(`Player row: ${player.row}, Player col: ${player.col}`);
 }
@@ -145,6 +145,11 @@ window.addEventListener('keydown', (event) => {
       clearPosition(player.col, player.row);
       player.moveDown();
       break;
+  }
+  // Set new treasure position if player reaches it 
+  if (player.col == treasure.col && player.row == treasure.row) {
+    treasure.setRandomPosition();
+    drawTreasure();
   }
   drawPlayer();
 });
