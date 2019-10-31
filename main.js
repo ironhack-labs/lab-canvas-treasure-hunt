@@ -17,7 +17,7 @@ function drawGrid() {
 
 
 function randomPos () {
-    return Math.floor(Math.random() *10 * 50);
+    return Math.floor(Math.random() *10);
 }
 
 console.log(randomPos())
@@ -76,10 +76,8 @@ function drawTreasure (){
     treasure.image.addEventListener('load', () => {
         const imageHeight = treasure.image.height;
         const imageWidth = treasure.image.width;
-      
-        const size = 0.5;
-      
-         context.drawImage( treasure.image, treasure.col, treasure.row, 50, 50);
+            
+         context.drawImage( treasure.image, treasure.col*50, treasure.row*50, 50, 50);
       });
 }
 
