@@ -54,8 +54,10 @@ class Character {
         this.col = col;
     }
     moveUp() {
-        if (this.row < 10 && this.row > 0) {
+        if (this.row < 10 && this.row !=0) {
             this.row -= 1;
+        } else if (this.row === 0) {
+            this.row += 9;
         } else {
             this.row = this.row;
         }
@@ -63,19 +65,25 @@ class Character {
     moveRight() {
         if (this.col < 9) {
             this.col++;
-        } 
+        } else {
+            this.col -= 9;
+        }
     }
     moveDown() {
-        if (this.row < 9 && this.row >= 0) {
+        if (this.row < 9) {
             this.row++;
+        } else if (this.row === 9) {
+            this.row -= 9;
         } else {
             this.row = this.row;
         }
     }
     moveLeft() {
-        if (this.col !== 0) {
+        if (this.col > 0) {
             this.col -= 1;
-          } else {
+        } else if (this.col === 0) {
+            this.col += 9;
+        } else {
             this.col = this.col;
           }
         }
