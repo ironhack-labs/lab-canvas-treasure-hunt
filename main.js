@@ -37,7 +37,7 @@ class Character {
 
     moveUp() {
         if (this.row > 0) {
-            this.row--; 
+            this.row--;
         } else {
             this.row = 9;
         }
@@ -120,16 +120,16 @@ function drawPlayer() {
             IMAGE_URL = 'starter-code/images/character-up.png';
             break;
         case 'down':
-                IMAGE_URL = 'starter-code/images/character-down.png';
-                break;
-                case 'left':
-                IMAGE_URL = 'starter-code/images/character-left.png';
-                break;
-                case 'right':
-                IMAGE_URL = 'starter-code/images/character-right.png';
-                break;
+            IMAGE_URL = 'starter-code/images/character-down.png';
+            break;
+        case 'left':
+            IMAGE_URL = 'starter-code/images/character-left.png';
+            break;
+        case 'right':
+            IMAGE_URL = 'starter-code/images/character-right.png';
+            break;
         default:
-                IMAGE_URL = 'starter-code/images/character-down.png';
+            IMAGE_URL = 'starter-code/images/character-down.png';
             break;
     }
 
@@ -157,45 +157,42 @@ function PrintScore() {
 window.addEventListener('keydown', (e) => {
     // Stop the default behavior (moving the screen to the left/up/right/down)
     event.preventDefault();
-  
+
     // React based on the key pressed
     switch (e.keyCode) {
-      case 37:
-        context.clearRect(player.col * 50, player.row *50, 50, 50);
-        player.moveLeft();
-        drawEverything();
-        console.log('left');
-        break;
-      case 38:
-        context.clearRect(player.col * 50, player.row *50, 50, 50);
-        player.moveUp();
-        drawEverything();
-        console.log('up');
-        break;
-      case 39:
-        context.clearRect(player.col * 50, player.row *50, 50, 50);
-        player.moveRight();
-        drawEverything();
-        console.log('right');
-        break;
-      case 40:
-        context.clearRect(player.col * 50, player.row *50, 50, 50);
-        player.moveDown();
-        drawEverything();
-        console.log('down');
-        break;
+        case 37:
+            context.clearRect(player.col * 50, player.row * 50, 50, 50);
+            player.moveLeft();
+            drawEverything();
+            console.log('left');
+            break;
+        case 38:
+            context.clearRect(player.col * 50, player.row * 50, 50, 50);
+            player.moveUp();
+            drawEverything();
+            console.log('up');
+            break;
+        case 39:
+            context.clearRect(player.col * 50, player.row * 50, 50, 50);
+            player.moveRight();
+            drawEverything();
+            console.log('right');
+            break;
+        case 40:
+            context.clearRect(player.col * 50, player.row * 50, 50, 50);
+            player.moveDown();
+            drawEverything();
+            console.log('down');
+            break;
     }
 
-    if (player.col === diamond.col && player.row === diamond.row){
+    if (player.col === diamond.col && player.row === diamond.row) {
         context.clearRect(diamond.col * 50, diamond.row * 50, 50, 50);
         diamond.setRandomPosition();
         player.collectedDiamons++;
         drawEverything();
 
     }
-  });
+});
 
-  drawEverything();
-
-
-
+drawEverything();
