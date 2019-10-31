@@ -172,3 +172,15 @@ window.addEventListener('keydown', (event) => {
         break;
     }
   });
+
+  let button = document.getElementById('button')
+
+  button.addEventListener('click', ()=>{
+      score = 0
+      document.getElementById('score').innerHTML = score;
+      document.getElementById('score').classList.remove('suma');
+        document.querySelector('h2').classList.remove('suma');
+      context.clearRect(0,0,width,height);
+      treasure.setRandomPosition();
+      drawEverything();
+  })
