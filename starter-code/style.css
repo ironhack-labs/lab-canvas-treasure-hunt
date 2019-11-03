@@ -1,3 +1,16 @@
-canvas{
+body{
+    margin: 50px;
+    display: flex; 
+    align-items: center;
+}
+#game{
+
     border: 3px solid black;
+}
+
+#player2{
+    color: white;
+    background-color: black;
+    width: 100px;
+    height: 70px;
 }

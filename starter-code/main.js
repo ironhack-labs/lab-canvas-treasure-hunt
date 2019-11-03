@@ -1,6 +1,9 @@
 // main.js
-const canvas = document.querySelector('canvas');
+//const canvas = document.querySelector('canvas');
+const canvas = document.getElementById('game');
+const scores = document.getElementById('scoreBoard')
 const context = canvas.getContext('2d');
+const context2 = scores.getContext('2d');
 const width = canvas.width;
 const height = canvas.height;
 
@@ -8,22 +11,46 @@ class Character {
     constructor(x, y) {
         this.row = x;
         this.col = y;
+        this.points = 0;
     }
     moveUp() {
-        this.col--
+        if(this.col > 0){
+            this.col--
+        }
     }
     moveDown() {
-        this.col++
+        if (this.col < 9) {
+            this.col++
+        }
     }
-
+    
     moveLeft() {
-        this.row--
+        if (this.row > 0) {
+            this.row--
+        }        
     }
 
     moveRight() {
-        this.row++
+        if (this.row < 9) {
+            this.row++
+        } 
     }
+    
+    drawPlayer() {
+        const IMAGE_URL = "./images/character-down.png";
+        // let x = Math.floor((Math.random() * 10));
+        // let y = Math.floor((Math.random() * 10));
 
+        const image = new Image();
+        image.src = IMAGE_URL;
+        context.drawImage(image, this.row * 50, this.col * 50, 45, 45);
+    
+        image.addEventListener('load', () => {
+            context.drawImage(image, this.row * 50, this.col * 50, 45, 45);
+            //console.log(player)
+        });
+    
+    }
 }
 
 class Treasure {
@@ -38,6 +65,8 @@ class Treasure {
 }
 
 
+
+
 // Iteration 1
 function drawGrid() {
     context.lineWidth = 3;
@@ -48,7 +77,7 @@ function drawGrid() {
         context.lineTo(i, height)
         context.closePath();
         context.stroke();
-
+        
     }
     for (i = 50; i < width; i = i + 50) {
         context.beginPath();
@@ -56,28 +85,25 @@ function drawGrid() {
         context.lineTo(width, i)
         context.closePath();
         context.stroke();
-
+        
     }
 }
 
-
 let player = new Character(0, 0);
+let player2 = new Character(9,0);
+console.log(player)
+console.log(player2)
 
-function drawPlayer() {
-    const IMAGE_URL = "./images/character-down.png";
-    // let x = Math.floor((Math.random() * 10));
-    // let y = Math.floor((Math.random() * 10));
-    let col = player.col
-    let row = player.row
-    const image = new Image();
-    image.src = IMAGE_URL;
+/* window.onload = function () {
+    document.getElementById("player2").onclick = function () {
+        
+        player2 = new Character(9, 9);
 
-    image.addEventListener('load', () => {
-        context.drawImage(image, row * 50, col * 50, 45, 45);
-        console.log(player)
-    });
+    };
 
-}
+}; */
+
+
 const treasure = new Treasure();
 treasure.setRandomPosition();
 
@@ -85,23 +111,46 @@ function drawTreasure() {
     const IMAGE_URL = "./images/treasure.png";
     const image = new Image();
     image.src = IMAGE_URL;
-
+    context.drawImage(image, treasure.row * 50, treasure.col * 50, 45, 45);
+    
     image.addEventListener('load', () => {
-        context.drawImage(image, treasure.row * 50, treasure.col * 50, 45, 45);
         console.log(treasure)
-
+        context.drawImage(image, treasure.row * 50, treasure.col * 50, 45, 45);
+        
 
     });
 
 
 }
 
+function scoreBoard(){
+    context2.clearRect(0,0,width,height)
+    context2.font = "bold  40px Arial"
+    context2.fillText("Player One:", 40,50)
+    context2.fillText(player.points, 40,90)
+    context2.fillText("Player Two:", 40,200)
+    context2.fillText(player2.points, 40,240)
+
+}
+
+
+
 function drawEverything() {
+    scoreBoard();
+
+
+
     context.clearRect(0, 0, 500, 500);
     drawGrid();
-    drawPlayer()
+    player2.drawPlayer()
+    player.drawPlayer()
     drawTreasure()
     if (player.col === treasure.col && player.row === treasure.row) {
+        player.points += 10
+        treasure.setRandomPosition()
+        drawEverything()
+    } else if (player2.col === treasure.col && player2.row === treasure.row){
+        player2.points += 10
         treasure.setRandomPosition()
         drawEverything()
     }
@@ -134,5 +183,22 @@ window.addEventListener('keydown', (event) => {
             player.moveDown();
             drawEverything();
             break;
+        case 65:
+            player2.moveLeft();
+            drawEverything();
+            break;
+        case 87:
+            player2.moveUp();
+            drawEverything();
+            break;
+        case 68:
+            player2.moveRight();
+            drawEverything();
+            break;
+        case 83:
+            player2.moveDown();
+            drawEverything();
+            break;
     }
+
 });
