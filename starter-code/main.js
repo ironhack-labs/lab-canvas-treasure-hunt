@@ -17,14 +17,24 @@ for (let i = 0; i < 10; i++) {
 }
 
 function drawEverything() {
-  context.clearRect(0,0,500,500);
+  context.clearRect(0,0,600,600);
   drawGrid();
   drawPlayer(player);
   drawTreasure(treasure, player);
+  drawScore(score)
 };
 
 function drawPlayer(character){
-  const IMAGE_URL = 'images/character-down.png';
+  let IMAGE_URL ;
+  if(character.direction === "d"){
+     IMAGE_URL = 'images/character-down.png';
+  } else if(character.direction === "u"){
+     IMAGE_URL = 'images/character-up.png';
+  } else if(character.direction === "l"){
+     IMAGE_URL = 'images/character-left.png';
+  }else {
+    IMAGE_URL = 'images/character-right.png';
+  }
   const image = new Image();
   image.src = IMAGE_URL;
   image.addEventListener('load', () => {
@@ -38,6 +48,7 @@ function drawPlayer(character){
 function drawTreasure(treasure, character){
   if (character.col === treasure.col && character.row === treasure.row){
   treasure.setRandomPosition()
+  score +=1 ;
   const IMAGE_URL = 'images/treasure.png';
   const image = new Image();
   image.src = IMAGE_URL;
@@ -59,26 +70,45 @@ function drawTreasure(treasure, character){
 }  
 };
 
+function drawScore(score){
+  context.font = '20px monospace';
+  context.fillStyle = 'black';
+  
+  context.fillText(`Score: ${score}`, 0, 530);
+}
+
 class Character {
   constructor(col, row) {
     this.col = col;
     this.row = row;
+    this.direction = "d"
 }
 moveUp() {
-  this.row -= 1
+  if(this.row >= 1){
+    this.row -= 1
+  } 
+  this.direction = "u"
 }
 
 moveRight(){
-  this.col += 1
+  if(this.col <= 8){
+    this.col += 1
+  }
+  this.direction = "r"
 }
 
 moveDown(){
-  this.row += 1
-
+  if(this.row <= 8){
+    this.row += 1
+  }
+  this.direction = "d"
 }
 
 moveLeft(){
-  this.col -= 1
+  if(this.col >= 1){
+    this.col -= 1
+  }
+  this.direction = "l"
 }
 
 }
@@ -122,4 +152,5 @@ window.addEventListener('keydown', (event) => {
 
 const player = new Character(0,0)
 const treasure = new Treasure()
+let score = -1
 drawEverything();
