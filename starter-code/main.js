@@ -54,7 +54,9 @@ console.log(player.col, player.row); // => 1,2
 const treasureActive = new Treasure();
 
 const drawTreasure = () => {
-  treasureActive.setRandomPosition();
+  if (typeof treasureActive.col !== 'number') {
+    treasureActive.setRandomPosition();
+  }
   const treasureImageSrc = './images/treasure.png';
   const treasureImage = new Image();
   treasureImage.src = treasureImageSrc;
