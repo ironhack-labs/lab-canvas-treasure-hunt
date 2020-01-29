@@ -63,10 +63,8 @@ function drawEverything() {
 const colide = () => {
   if (player.row === treasureActive.row && player.col === treasureActive.col) {
     treasureActive.setRandomPosition();
-    this.score += 1;
-    score.innerText = this.score;
-    console.log(this.score);
-    console.dir(score.innerText);
+    player.score += 1;
+    score.innerText = player.score;
   }
   //console.log(player.row, player.col, treasureActive.row, treasureActive.col);
 };
