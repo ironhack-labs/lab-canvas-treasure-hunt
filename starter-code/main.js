@@ -15,10 +15,12 @@ function drawGrid() {
 }
 
 class Character {
-  constructor(col, row) {
+  constructor(col, row, score) {
     this.col = 0;
     this.row = 0;
+    this.score = 0;
   }
+
   moveUp() {
     this.row--;
   }
@@ -63,7 +65,7 @@ class Treasure {
 
 const treasure = new Treasure(0, 0);
 treasure.setRandomPosition();
-console.log(treasure.col, treasure.row);
+// console.log(treasure.col, treasure.row);
 
 const drawTreasure = () => {
   const IMAGE_URL = './images/treasure.png';
@@ -84,22 +86,22 @@ window.addEventListener('keydown', event => {
   switch (event.keyCode) {
     case 37:
       player.moveLeft();
-      console.log('left');
+      // console.log('left');
       drawEverything();
       break;
     case 38:
       player.moveUp();
-      console.log('up');
+      // console.log('up');
       drawEverything();
       break;
     case 39:
       player.moveRight();
-      console.log('right');
+      // console.log('right');
       drawEverything();
       break;
     case 40:
       player.moveDown();
-      console.log('down');
+      // console.log('down');
       drawEverything();
       break;
   }
@@ -107,6 +109,7 @@ window.addEventListener('keydown', event => {
   // Check if the user is on the treasure
   if (player.row === treasure.row && player.col === treasure.col) {
     player.score++;
+    console.log('The players score is ' + player.score);
     treasure.setRandomPosition();
   }
 });
