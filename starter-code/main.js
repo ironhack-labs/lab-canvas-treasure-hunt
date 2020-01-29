@@ -31,7 +31,7 @@ function drawGrid() {
 
 // Iteration 2
 
-const player = new Character(0, 0);
+const player = new Character(0, 0, 0);
 
 // Iteration 3
 
@@ -87,6 +87,9 @@ window.addEventListener('keydown', event => {
   }
 
   if (player.col === treasure.col && player.row === treasure.row) {
+    player.score++;
+    let counter = document.querySelector('h1 span');
+    counter.innerText = player.score;
     treasure.setRandomPosition();
   }
 });
