@@ -4,35 +4,19 @@ const context = canvas.getContext('2d');
 const width = canvas.width;
 const height = canvas.height;
 
+const score = document.querySelector('h1 span');
+
 // Iteration 1
 function drawGrid() {
   for (let i = 0; i <= 10; i++) {
     context.beginPath();
+    //context.strokeStyle('orange');
     context.moveTo(0 + 50 * i, 0);
     context.lineTo(50 * i, 500);
     context.moveTo(0, 0 + 50 * i);
     context.lineTo(500, 0 + 50 * i);
     context.stroke();
     context.closePath();
-  }
-}
-
-class Character {
-  constructor(col, row) {
-    this.col = col;
-    this.row = row;
-  }
-  moveUp() {
-    this.col -= 50;
-  }
-  moveRight() {
-    this.row += 50;
-  }
-  moveDown() {
-    this.col += 50;
-  }
-  moveLeft() {
-    this.row -= 50;
   }
 }
 
@@ -46,11 +30,7 @@ class Treasure {
     this.row = 50 * Math.floor(Math.random() * 10);
   }
 }
-//clear this only for test
-const player = new Character(0, 0); // (0,0) = Initial position
 
-console.log(player.col, player.row); // => 1,2
-//delete above till const player
 const treasureActive = new Treasure();
 
 const drawTreasure = () => {
@@ -61,12 +41,12 @@ const drawTreasure = () => {
   const treasureImage = new Image();
   treasureImage.src = treasureImageSrc;
   treasureImage.addEventListener('load', () => {
-    context.drawImage(treasureImage, treasureActive.col, treasureActive.row, 45, 45);
+    context.drawImage(treasureImage, treasureActive.row, treasureActive.col, 45, 45);
   });
 };
 
 const drawCharater = () => {
-  const characterImageSrc = './images/character-down.png';
+  const characterImageSrc = characterImageDirection(player.direction); //'./images/character-down.png'
   const characterImage = new Image();
   characterImage.src = characterImageSrc;
   characterImage.addEventListener('load', () => {
@@ -75,10 +55,21 @@ const drawCharater = () => {
 };
 
 function drawEverything() {
+  colide();
   drawGrid();
   drawCharater();
   drawTreasure();
 }
+const colide = () => {
+  if (player.row === treasureActive.row && player.col === treasureActive.col) {
+    treasureActive.setRandomPosition();
+    this.score += 1;
+    score.innerText = this.score;
+    console.log(this.score);
+    console.dir(score.innerText);
+  }
+  //console.log(player.row, player.col, treasureActive.row, treasureActive.col);
+};
 
 drawEverything();
 
@@ -91,18 +82,22 @@ window.addEventListener('keydown', event => {
     case 37:
       console.log('left');
       player.moveLeft();
+      player.direction = 'left';
       break;
     case 38:
       console.log('up');
       player.moveUp();
+      player.direction = 'up';
       break;
     case 39:
       console.log('right');
       player.moveRight();
+      player.direction = 'right';
       break;
     case 40:
       console.log('down');
       player.moveDown();
+      player.direction = 'down';
       break;
   }
   context.clearRect(0, 0, canvas.width, canvas.height);
