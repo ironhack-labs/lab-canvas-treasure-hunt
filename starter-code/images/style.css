@@ -1,0 +1,9 @@
+div {
+    display: block;
+    font: arial;
+    font-size: xx-large;
+}
+
+#score1, #score2 {
+    display: inline;
+}
