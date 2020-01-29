@@ -22,19 +22,27 @@ class Character {
   }
 
   moveUp() {
-    this.row--;
+    if (this.row > 0) {
+      this.row--;
+    }
   }
 
   moveRight() {
-    this.col++;
+    if (this.col < 9) {
+      this.col++;
+    }
   }
 
   moveDown() {
-    this.row++;
+    if (this.row < 9) {
+      this.row++;
+    }
   }
 
   moveLeft() {
-    this.col--;
+    if (this.col > 0) {
+      this.col--;
+    }
   }
 }
 
