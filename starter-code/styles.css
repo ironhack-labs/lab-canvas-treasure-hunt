@@ -1,0 +1,22 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif
+  background-color: #e7f5fe;
+}
+
+h1 {
+  text-align: center;
+}
+
+#game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#score {
+  margin-left: 50px;
+  background-color: #c2185b;
+  width: 40%;
+  text-align: center;
+  color: white;
+}
