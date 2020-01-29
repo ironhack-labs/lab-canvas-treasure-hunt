@@ -5,7 +5,9 @@ class Treasure {
   }
 
   setRandomPosition() {
-    this.row = 5;
-    this.col = 5;
+    const randomPosX = Math.floor(Math.random() * 10);
+    const randomPosY = Math.floor(Math.random() * 10);
+    this.row = randomPosX;
+    this.col = randomPosY;
   }
 }

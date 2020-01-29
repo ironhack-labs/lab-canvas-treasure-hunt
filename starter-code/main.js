@@ -1,4 +1,5 @@
 const canvas = document.querySelector('canvas');
+const $scoreNode = document.getElementById('score');
 const context = canvas.getContext('2d');
 const width = canvas.width;
 const height = canvas.height;
@@ -26,7 +27,21 @@ function drawGrid() {
 //ex3
 
 function drawPlayer(player) {
-  const imagePlayer = './images/character-down.png';
+  let imagePlayer = '';
+  switch (player.direction) {
+    case 'S':
+      imagePlayer = './images/character-down.png';
+      break;
+    case 'N':
+      imagePlayer = './images/character-up.png';
+      break;
+    case 'E':
+      imagePlayer = './images/character-right.png';
+      break;
+    case 'W':
+      imagePlayer = './images/character-left.png';
+      break;
+  }
   const image = new Image();
   image.src = imagePlayer;
 
@@ -42,8 +57,16 @@ function drawTreasure() {
   const image = new Image();
   image.src = imageTreasure;
 
+  if (player.row === treasure.row && player.col === treasure.col) {
+    treasure.setRandomPosition();
+    console.log('you are RICH!');
+    player.incScore();
+    $scoreNode.innerHTML = '';
+    $scoreNode.innerHTML = 'Score : ' + player.score;
+  }
+
   image.addEventListener('load', () => {
-    context.drawImage(image, treasure.row * 50, treasure.col * 50, 50, 50);
+    context.drawImage(image, treasure.col * 50, treasure.row * 50, 50, 50);
   });
 }
 
@@ -51,10 +74,6 @@ function drawEverything(player) {
   drawGrid();
   drawPlayer(player);
   drawTreasure();
-  if (player.row === treasure.row && player.col === treasure.col) {
-    treasure.setRandomPosition();
-    console.log('you are RICH!');
-  }
 }
 const player = new Character(5, 5); // defini a posiç\ao inicial do player
 

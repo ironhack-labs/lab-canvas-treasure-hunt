@@ -1,0 +1,9 @@
+body {
+  font-size: 2em;
+}
+
+#score {
+  border: solid;
+  margin: 30px 1200px 30px 30px;
+  padding: 50px;
+}
