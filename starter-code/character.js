@@ -1,3 +1,4 @@
+var players = [];
 class Character {
   constructor(col, row, direction, score) {
     this.col = col;
@@ -29,9 +30,19 @@ class Character {
       this.row += 50;
     }
   }
+  setRandomPosition() {
+    this.col = 50 * Math.floor(Math.random() * 10);
+    this.row = 50 * Math.floor(Math.random() * 10);
+  }
 }
 
-const player = new Character(0, 0); // (0,0) = Initial position
+const player = new Character(); // (0,0) = Initial position
+player.setRandomPosition();
+players.push(player);
+
+const player2 = new Character();
+player2.setRandomPosition();
+players.push(player2);
 
 const characterImageDirection = direction => {
   switch (direction) {

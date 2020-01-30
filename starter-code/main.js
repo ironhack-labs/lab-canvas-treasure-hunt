@@ -45,32 +45,35 @@ const drawTreasure = () => {
   });
 };
 
-const drawCharater = () => {
-  const characterImageSrc = characterImageDirection(player.direction); //'./images/character-down.png'
+const drawCharater = players => {
+  const characterImageSrc = characterImageDirection(players.direction); //'./images/character-down.png'
   const characterImage = new Image();
   characterImage.src = characterImageSrc;
   characterImage.addEventListener('load', () => {
-    context.drawImage(characterImage, player.row, player.col);
+    context.drawImage(characterImage, players.row, players.col);
   });
 };
 
 function drawEverything() {
-  colide();
+  colide(players[0]);
+  colide(players[1]);
   drawGrid();
-  drawCharater();
+  drawCharater(players[0]);
+  drawCharater(players[1]);
   drawTreasure();
 }
-const colide = () => {
-  if (player.row === treasureActive.row && player.col === treasureActive.col) {
+const colide = players => {
+  if (players.row === treasureActive.row && players.col === treasureActive.col) {
     treasureActive.setRandomPosition();
-    player.score += 1;
-    score.innerText = player.score;
+    players.score += 1;
+    score.innerText = players.score;
   }
   //console.log(player.row, player.col, treasureActive.row, treasureActive.col);
 };
 
 drawEverything();
 
+//for player one
 window.addEventListener('keydown', event => {
   // Stop the default behavior (moving the screen to the left/up/right/down)
   event.preventDefault();
@@ -96,6 +99,37 @@ window.addEventListener('keydown', event => {
       console.log('down');
       player.moveDown();
       player.direction = 'down';
+      break;
+  }
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  drawEverything();
+});
+//for player two
+window.addEventListener('keydown', event => {
+  // Stop the default behavior (moving the screen to the left/up/right/down)
+  event.preventDefault();
+
+  // React based on the key pressed
+  switch (event.keyCode) {
+    case 65:
+      console.log('left');
+      player2.moveLeft();
+      player2.direction = 'left';
+      break;
+    case 87:
+      console.log('up');
+      player2.moveUp();
+      player2.direction = 'up';
+      break;
+    case 68:
+      console.log('right');
+      player2.moveRight();
+      player2.direction = 'right';
+      break;
+    case 83:
+      console.log('down');
+      player2.moveDown();
+      player2.direction = 'down';
       break;
   }
   context.clearRect(0, 0, canvas.width, canvas.height);
