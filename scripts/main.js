@@ -12,17 +12,25 @@ class Character {
     }
       
       moveUp(){
+        if (this.row > 0) {
         this.row--
       }
+    }
       moveDown(){
+        if (this.row < 9) {
         this.row++
       }
+    }
       moveLeft(){
+        if (this.col > 0){
         this.col--
       }
+    }
       moveRight(){
+        if (this.col < 9){
         this.col++  
      }
+    }
    }
 
 
@@ -71,7 +79,7 @@ const characterImage = new Image();
 characterImage.src = characterImageUrl;
 
 characterImage.addEventListener('load', () => {
-  context.drawImage(characterImage, 0, 0, 50, 50)});
+  context.drawImage(characterImage, player.col * 50, player.row * 50, 50, 50)});
 }
 
 
@@ -100,15 +108,19 @@ window.addEventListener('keydown', (event) => {
   switch (event.keyCode) {
     case 37:
       player.moveLeft();
+      drawEverything();
       break;
     case 38:
       player.moveUp();
+      drawEverything();
       break;
     case 39:
       player.moveRight();
+      drawEverything();
       break;
     case 40:
       player.moveDown();
+      drawEverything();
       break;
   }
 });
