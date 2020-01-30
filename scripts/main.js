@@ -28,29 +28,22 @@ class Character {
 
 const player = new Character(0, 0); // (0,0) = Initial position
 
-player.moveDown(); // Increase by 1 the value of player.row
-player.moveDown(); // Increase by 1 the value of player.row
-player.moveRight(); // Increase by 1 the value of player.col
-
-console.log(player.col, player.row); // => 1,2
-
-
 //Class Treasure
 
 class Treasure {
-  constructor(){
-    this.col = 0
-    this.row = 0
+  constructor(col,row){
+    this.col = col,
+    this.row = row
   }
   
   setRandomPosition(){
-    this.col = (Math.floor(Math.random()*10)*50);
-    this.row = (Math.floor(Math.random()*10)*50)
+    this.col = (Math.floor(Math.random()*10));
+    this.row = (Math.floor(Math.random()*10))
   }
 
 }
 
-const treasure = new Treasure ();
+const treasure = new Treasure (0,0);
 
 // Iteration 1
 function drawGrid() {
@@ -87,17 +80,42 @@ function drawTreasure() {
   const treasureImageUrl = './starter-code/images/treasure.png';
   const treasureImage = new Image();
   treasureImage.src = treasureImageUrl;
-
-  treasureImage.addEventListener('load', () => {
-    treasure.setRandomPosition()
-    context.drawImage(treasureImage, treasure.col, treasure.row, 50, 50)});
+  
+    if ((player.col === treasure.col) && (player.row === treasure.row)) {
+      treasure.setRandomPosition()
+      treasureImage.addEventListener('load', () => {
+        context.drawImage(treasureImage, treasure.col * 50, treasure.row * 50, 50, 50)});
+    } else {
+      treasureImage.addEventListener('load', () => {
+        context.drawImage(treasureImage, treasure.col * 50, treasure.row * 50, 50, 50)});
+    }
 }
 
 
+window.addEventListener('keydown', (event) => {
+  // Stop the default behavior (moving the screen to the left/up/right/down)
+  event.preventDefault();
 
+  // React based on the key pressed
+  switch (event.keyCode) {
+    case 37:
+      player.moveLeft();
+      break;
+    case 38:
+      player.moveUp();
+      break;
+    case 39:
+      player.moveRight();
+      break;
+    case 40:
+      player.moveDown();
+      break;
+  }
+});
 
 
 function drawEverything() {
+  context.clearRect(0,0,500,500);
   drawGrid();
   drawPlayer();
   drawTreasure()
