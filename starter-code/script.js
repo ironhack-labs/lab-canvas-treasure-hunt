@@ -55,6 +55,8 @@ class Treasure {
   }
 }
 
+var score = document.getElementById('value').innerText;
+
 const player = new Character(0, 0);
 const treasure = new Treasure(0, 0);
 
@@ -75,6 +77,10 @@ function drawTreasure() {
   treasureImg.src = imageUrl;
   if (player.row === treasure.row && player.col === treasure.col) {
     treasure.setRandomPosition();
+    var score = Number(document.getElementById('value').innerText);
+    score += 1;
+    document.getElementById('value').innerText = score;
+    console.log(score);
     context.drawImage(treasureImg, treasure.col * 50, treasure.row * 50, 50, 50);
   } else {
     treasureImg.addEventListener('load', () => {
@@ -116,3 +122,7 @@ function drawEverything() {
 }
 
 drawEverything();
+
+//var value = document.getElementsByClassName('value');
+//value.setAttribute('innerText', '2');
+console.dir($value);

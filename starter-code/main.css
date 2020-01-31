@@ -1,0 +1,39 @@
+* {
+  font-family: sans-serif;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+section :first-child {
+  display: flex;
+  justify-content: center;
+}
+
+.game {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.score {
+  display: flex;
+  background-color: brown;
+  width: 300px;
+  margin-top: 15px;
+  padding-left: 40px;
+}
+
+.score p {
+  font-size: large;
+  font-weight: 600;
+  text-align: center;
+}
