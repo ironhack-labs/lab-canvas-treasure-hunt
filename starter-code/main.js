@@ -55,18 +55,21 @@ const drawCharater = players => {
 };
 
 function drawEverything() {
-  colide(players[0]);
-  colide(players[1]);
+  colide();
   drawGrid();
   drawCharater(players[0]);
   drawCharater(players[1]);
   drawTreasure();
 }
-const colide = players => {
-  if (players.row === treasureActive.row && players.col === treasureActive.col) {
+const colide = () => {
+  if (players[0].row === treasureActive.row && players[0].col === treasureActive.col) {
     treasureActive.setRandomPosition();
-    players.score += 1;
-    score.innerText = players.score;
+  }
+  if (players[1].row === treasureActive.row && players[1].col === treasureActive.col) {
+    treasureActive.setRandomPosition();
+    players[0].score();
+    players[1].score();
+    console.log(players[0]);
   }
   //console.log(player.row, player.col, treasureActive.row, treasureActive.col);
 };

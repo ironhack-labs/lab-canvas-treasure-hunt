@@ -34,6 +34,12 @@ class Character {
     this.col = 50 * Math.floor(Math.random() * 10);
     this.row = 50 * Math.floor(Math.random() * 10);
   }
+  score(){
+    this.score += 1;
+    score.innerText = this.score;
+    console.log(this.score)
+    console.dir(score.innerText)
+  }
 }
 
 const player = new Character(); // (0,0) = Initial position
