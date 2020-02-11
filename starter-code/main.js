@@ -30,7 +30,7 @@ function drawPlayer(player) {
   let imagePlayer = '';
   switch (player.direction) {
     case 'S':
-      imagePlayer = './images/character-down.png';
+      imagePlayer = './images/cr7.png';
       break;
     case 'N':
       imagePlayer = './images/character-up.png';
