@@ -13,14 +13,14 @@ class Treasure {
     }
 
     setRandomPosition() {
-        this.col = Math.floor(Math.random()*10);
-        this.row = Math.floor(Math.random()*10);
+        this.col = Math.floor(Math.random()*10)*basePixel;
+        this.row = Math.floor(Math.random()*10)*basePixel;
     }
     
-    drawTreasure () {
+    drawTreasure (col, row) {
         this.image.addEventListener('load', ()=>{
-            this.context.drawImage(this.image, this.col, this.row, basePixel, basePixel);
+            this.context.drawImage(this.image, col, row, basePixel, basePixel);
         })
-        this.context.drawImage(this.image, this.col, this.row, basePixel, basePixel);
+        this.context.drawImage(this.image, col, row, basePixel, basePixel);
     }; 
 }

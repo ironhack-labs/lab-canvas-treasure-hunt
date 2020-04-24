@@ -7,16 +7,19 @@ const height = canvas.height;
 const basePixel = width/10;
 
 const background = new Background(canvas, context, basePixel);
+
 const treasure = new Treasure(0,0, canvas, context);
+treasure.setRandomPosition();
+
+
 const player = new Character(0, 0, canvas, context, basePixel);
     
-
-
 function drawEverything() {
-  background.clearCanvas()
+  background.clearCanvas();
   background.drawGrid();
-  player.drawPlayer()
-  treasure.drawTreasure()
+  player.drawPlayer();
+  treasure.drawTreasure(treasure.col, treasure.row);
+
 }
 
 drawEverything();
@@ -28,7 +31,7 @@ window.addEventListener('keydown', (event) => {
 
   switch (event.keyCode) {
       //right
-      case 39 && y > 0:
+      case 39:
           player.moveRight ();
           drawEverything();
           break

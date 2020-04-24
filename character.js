@@ -19,27 +19,31 @@ class Character {
     }
 
     moveDown () {
-        this.row = this.row + basePixel;
-
+        if (this.row < height - basePixel || this.row <= basePixel){
+            this.row = this.row + basePixel;
+        } else {this.row = height - basePixel}
     }
     
     moveUp () {
-        this.row = this.row - basePixel;
-
-    }
+        if (this.row >= height - basePixel || this.row >= basePixel){
+            this.row = this.row - basePixel;
+        } else {this.row = 0}
+        }
 
     moveLeft () {
-        this.col = this.col - basePixel;
-    }
+        if (this.col >= width - basePixel || this.col >= basePixel){
+            this.col = this.col - basePixel;
+        } else {this.col = 0}
+        }
 
     moveRight () {
-        this.col = this.col + basePixel;
-
+        if (this.col < width - basePixel || this.col <= basePixel){
+            this.col = this.col + basePixel;
+        } else {this.col = width - basePixel}
+    }
+        
     }      
     
-
-} 
-  
 
 
 
