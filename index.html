@@ -2,22 +2,25 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>JS | Canvas Treasure Hunt</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>JS | Canvas Treasure Hunt</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <canvas width="500" height="500"></canvas>
-    <script src="character.js"></script>
-    <!--this js file contains the character blueprint so it's need to be loaded first than the main js, that has initialization of the character-->
-    <script src="treasure.js"></script>
-    <!--load this first than the main-->
-    <script src="main.js"></script>
-    <!--load the main in the end-->
-
+  <canvas width="500" height="500"></canvas>
+  <script src="game.js"></script>
+  <script src="background.js"></script>
+  <!--load this first than the main-->
+  <script src="character.js"></script>
+  <!--load this first than the main-->
+  <!--this js file contains the character blueprint so it's need to be loaded first than the main js, that has initialization of the character-->
+  <script src="treasure.js"></script>
+  <script src="scoreboard.js"></script>
+  <script src="script.js"></script>
+  <!--load the main in the end-->
 </body>
 
 </html>
