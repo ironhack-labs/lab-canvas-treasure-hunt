@@ -19,36 +19,28 @@ function drawGrid() {
   }
 }
 
-function drawEverything() {
-  drawGrid();
-  //drawPlayer();
-  //drawTreasure();
-}
-
-drawEverything();
-
 class Character {
   constructor(col, row) {
     this.col = col;
     this.row = row;
   }
   moveUp() {
-    this.row -= 1;
+    this.row -= 50;
   }
   moveDown() {
-    this.row += 1;
+    this.row += 50;
   }
   moveRight() {
-    this.col += 1;
+    this.col += 50;
   }
   moveLeft() {
-    this.col -= 1;
+    this.col -= 50;
   }
 }
 
-//let Steven = new Character(50, 100);
+let Steven = new Character(50, 100);
 
-const drawPlayer = (playerName) => {
+function drawPlayer(playerName) {
   const player = new Image();
   player.src = 'images/character-down.png';
 
@@ -56,9 +48,7 @@ const drawPlayer = (playerName) => {
     // Draw only with starting point
     context.drawImage(player, playerName.col, playerName.row);
   });
-};
-
-//drawPlayer(Steven);
+}
 
 class Treasure {
   constructor(col, row) {
@@ -67,7 +57,7 @@ class Treasure {
   }
 }
 
-//const testTreasure = new Treasure(50, 100);
+const testTreasure = new Treasure(100, 100);
 
 const drawTreasure = (treasureObject) => {
   const treasure = new Image();
@@ -78,26 +68,40 @@ const drawTreasure = (treasureObject) => {
   );
 };
 
-//drawTreasure(testTreasure);
+function drawEverything() {
+  drawGrid();
+  drawPlayer(Steven);
+  drawTreasure(testTreasure);
+}
+
+drawEverything();
+
+function clearCanvas () {
+    context.clearRect(0, 0, 500, 500);
+  }
 
 window.addEventListener('keydown', function (event) {
   const key = event.key;
+  event.preventDefault();
   switch (key) {
     case 'ArrowUp':
-      console.log('up');
+      Steven.moveUp();
       break;
     case 'ArrowDown':
-      startingY += 10;
+      Steven.moveDown();
       break;
     case 'ArrowLeft':
-      startingX -= 10;
+      Steven.moveLeft();
       break;
     case 'ArrowRight':
-      startingX += 10;
+      Steven.moveRight();
       break;
     default:
       console.log('An unknown key was pressed');
   }
-  //clearCanvas();
-  //draw smth
+  clearCanvas();
+  drawEverything()
+  if (Steven.col === testTreasure.col && Steven.row === testTreasure.row) {
+      console.log('YOU FOUND THE TREASURE!!!')
+  }
 });
