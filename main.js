@@ -22,7 +22,7 @@ function drawGrid(x,y) {
       context.moveTo(50 * i, 0);
       context.lineTo(50 * i, 500);
       context.stroke();
-      context.moveTo(0, * i * 50);
+      context.moveTo(0, i * 50);
       context.lineTo(500, i * 50);
       context.stroke();
       context.closePath();
@@ -162,4 +162,4 @@ document.addEventListener('keydown', event => {
   // drawEverything();
   
   // Triggering the first drawEverything after 500ms ensures that all pictures had been loaded
-  setTimeout(drawEverything, 500);
+  setTimeout(drawEverything, 500)}
